@@ -21,7 +21,9 @@ const Navbar = () => {
         <i className="navbar__icon bx bx-menu"></i>
       </div>
 
-      <h1 className="navbar__logo">Smiluxe</h1>
+      <Link to={ModuleRoutes.HOME} className="logo">
+        <h1 className="navbar__logo">Smiluxe</h1>
+      </Link>
       <div className={`navbar__links ${state ? "navbar__links--active" : ""}`}>
         <Link to={ModuleRoutes.HOME} className="navbar__link">
           Home
