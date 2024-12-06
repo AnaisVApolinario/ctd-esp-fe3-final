@@ -9,7 +9,7 @@ const Home = () => {
   
   return (
     <>
-      <h1 className='home__title'>Home</h1>
+      <h1 className="page__title">Home</h1>
       <div className='card__container'>
         {users.map((user) => (
           <Card 

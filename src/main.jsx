@@ -7,6 +7,7 @@ import Contact from "../src/Routes/Contact";
 import Favs from "../src/Routes/Favs";
 import { ModuleRoutes } from "./routes";
 import { ContextProvider } from "./Context/global.context";
+import Detail from "./Routes/Detail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,7 @@ root.render(
           <Route index element={<Home />} />
           <Route path={ModuleRoutes.CONTACT} element={<Contact />} />
           <Route path={ModuleRoutes.FAV} element={<Favs />} />
+          <Route path={ModuleRoutes.DETAIL} element={<Detail/>} />
         </Route>
       </Routes>
     </BrowserRouter>
