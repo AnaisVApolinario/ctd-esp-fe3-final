@@ -1,7 +1,7 @@
-const Button = ({onClick, children}) => {
+const Button = ({onClick, text, children}) => {
   return (
     <button onClick={onClick} className="card__fav-button">
-    {children}
+    {text} {children}
     </button>
   )
 }

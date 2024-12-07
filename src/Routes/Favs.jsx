@@ -11,8 +11,6 @@ const Favs = () => {
     <>
       <h1 className="page__title">Dentists Favs</h1>
       <div className="card__container">
-        {/* este componente debe consumir los destacados del localStorage */}
-        {/* Deberan renderizar una Card por cada uno de ellos */}
         {favs &&
           favs.map((fav) => (
             <Card

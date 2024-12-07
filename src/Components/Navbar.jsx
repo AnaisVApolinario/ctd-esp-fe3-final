@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 import { ModuleRoutes } from "../routes";
 
 const Navbar = () => {
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [state, setState] = useState(false);
+  const toggleTheme = () => {
+    setIsDarkTheme((prev) => !prev);
+    document.body.classList.toggle('dark-theme', !isDarkTheme);
+  };
 
   const toggleMenu = () => {
     setState(!state);
   };
   return (
-    // <nav>
-    //   {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
-    //   {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-    //   <button>Change theme</button>
-    // </nav>
     <nav className="navbar">
       <div className="navbar__menu-icon" onClick={toggleMenu}>
         <i className="navbar__icon bx bx-menu"></i>
@@ -35,8 +35,8 @@ const Navbar = () => {
           Favs
         </Link>
       </div>
-      <div className="navbar__theme-toggle">
-        <i className="navbar__icon bx bx-moon" style={{ color: "white" }}></i>
+      <div className="navbar__theme-toggle"onClick={toggleTheme} role="button">
+        <i className={`navbar__icon ${isDarkTheme? "bx bx-sun" : "bx bx-moon" }`} style={{ color: "white" }}></i>
       </div>
     </nav>
   );

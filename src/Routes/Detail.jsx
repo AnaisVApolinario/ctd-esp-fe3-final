@@ -11,7 +11,6 @@ const Detail = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await apiService.getUser(parms.id);
-      console.log(response);
       setUser(response);
     };
     fetchUser();
