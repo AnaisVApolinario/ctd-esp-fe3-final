@@ -2,16 +2,15 @@ import  {useContext } from 'react'
 import Card from '../Components/Card'
 import { ContextGlobal } from '../Context/global.context'
 
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-
 const Home = () => {
-  const{users} = useContext(ContextGlobal)
+  const { state } = useContext(ContextGlobal);
+
   
   return (
     <>
       <h1 className="page__title">Home</h1>
       <div className='card__container'>
-        {users.map((user) => (
+        {state.users.map((user) => (
           <Card 
           key={user.id} 
           name={user.name}

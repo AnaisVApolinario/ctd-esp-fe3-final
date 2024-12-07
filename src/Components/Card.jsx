@@ -4,29 +4,18 @@ import { ContextGlobal } from "../Context/global.context";
 import { Link } from "react-router-dom";
 
 const Card = ({ name, username, id }) => {
-  const { favs, setFavs } = useContext(ContextGlobal);
-  // const [isFav, setIsFav] = useState(false);
-  // Determinar si esta tarjeta es favorita
-  // Determinar si esta tarjeta es favorita
-  const isFav = favs.some((fav) => fav.id === id);
+  const { state, dispatch } = useContext(ContextGlobal);
+
+  const isFav = state.favs.some((fav) => fav.id === id);
+
   const addFav = () => {
     const newFav = { name, username, id };
-    setFavs((prevFavs) => {
-      // const updatedFavs = [...prevFavs, newFav];
-      // localStorage.setItem("favs", JSON.stringify(updatedFavs));
-      // return updatedFavs;
-      const favExists = prevFavs.some((fav) => fav.id === id);
-      let updatedFavs;
-      if (favExists) {
-        // Eliminar el favorito si ya existe
-        updatedFavs = prevFavs.filter((fav) => fav.id !== id);
-      } else {
-        // Agregar el nuevo favorito si no existe
-        updatedFavs = [...prevFavs, newFav];
-      }
-      localStorage.setItem("favs", JSON.stringify(updatedFavs));
-      return updatedFavs;
-    });
+
+    if (isFav) {
+      dispatch({ type: "REMOVE_FAV", payload: newFav });
+    } else {
+      dispatch({ type: "ADD_FAV", payload: newFav });
+    }
   };
 
   return (

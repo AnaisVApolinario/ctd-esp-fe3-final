@@ -1,19 +1,20 @@
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ContextGlobal } from "../Context/global.context";
 import { Link } from "react-router-dom";
 import { ModuleRoutes } from "../routes";
 
 const Navbar = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const [state, setState] = useState(false);
-  const toggleTheme = () => {
-    setIsDarkTheme((prev) => !prev);
-    document.body.classList.toggle('dark-theme', !isDarkTheme);
+  const { state, dispatch } = useContext(ContextGlobal);
+  const [isMenu, setMenu] = useState(false);
+  const { theme } = state;
+ const toggleTheme = () => {
+    dispatch({ type: "TOGGLE_THEME" });
   };
 
   const toggleMenu = () => {
-    setState(!state);
+    setMenu(!isMenu);
   };
   return (
     <nav className="navbar">
@@ -24,7 +25,7 @@ const Navbar = () => {
       <Link to={ModuleRoutes.HOME} className="logo">
         <h1 className="navbar__logo">Smiluxe</h1>
       </Link>
-      <div className={`navbar__links ${state ? "navbar__links--active" : ""}`}>
+      <div className={`navbar__links ${isMenu ? "navbar__links--active" : ""}`}>
         <Link to={ModuleRoutes.HOME} className="navbar__link">
           Home
         </Link>
@@ -36,7 +37,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar__theme-toggle"onClick={toggleTheme} role="button">
-        <i className={`navbar__icon ${isDarkTheme? "bx bx-sun" : "bx bx-moon" }`} style={{ color: "white" }}></i>
+        <i className={`navbar__icon ${theme? "bx bx-sun" : "bx bx-moon" }`} style={{ color: "white" }}></i>
       </div>
     </nav>
   );

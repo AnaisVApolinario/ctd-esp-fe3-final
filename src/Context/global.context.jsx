@@ -1,30 +1,44 @@
-import { createContext , useState, useEffect} from "react";
+import { createContext , useEffect, useReducer } from "react";
 import apiService from "../services/apiService"; 
+import { reducer } from "../Reducer/reducer";
 
-export const initialState = {theme: "", data: []}
-const initialFavs = JSON.parse(localStorage.getItem('favs'));
+const initialFavs = JSON.parse(localStorage.getItem("favs")) || [];
+
+const initialState = {
+  favs: initialFavs,
+  users: [],
+  theme: "light",
+};
 
 export const ContextGlobal = createContext(undefined);
 
 export const ContextProvider = ({ children }) => {
-  //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
-  // const [favs, setFavs] = useState([]); 
-  const [favs, setFavs] = useState(initialFavs ? initialFavs : []);
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const data = await apiService.getUsers();
-      setUsers(data);
-    };
 
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+
+   useEffect(() => {
+    const fetchUsers = async () => {
+      const users = await apiService.getUsers();
+      dispatch({ type: "SET_USERS", payload: users });
+    };
+    console.log(fetchUsers());
+    
     fetchUsers();
-  }, [])
+  }, []);
+
+ 
+   useEffect(() => {
+    localStorage.setItem("favs", JSON.stringify(state.favs));
+  }, [state.favs]);
+
   useEffect(() => {
-    localStorage.setItem('favs', JSON.stringify(favs));
-  }, [favs])
+    document.body.classList.toggle("dark-theme", state.theme === "dark");
+  }, [state.theme]);
+
 
   return (
-    <ContextGlobal.Provider value={{users, favs, setFavs}}>
+    <ContextGlobal.Provider value={{state, dispatch}}>
       {children}
     </ContextGlobal.Provider>
   );
