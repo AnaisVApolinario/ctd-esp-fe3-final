@@ -1,6 +1,6 @@
 export const ModuleRoutes ={
   HOME : "/",
   CONTACT : "/contact",
-  FAV  :"/fav",
-  DETAIL:"/detail/:id"
+  FAV  :"/favs",
+  DETAIL:"/dentist/:id"
 }
