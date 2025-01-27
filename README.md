@@ -2,7 +2,7 @@
 
 Este proyecto es una aplicación web de gestión de odontólogos en una clínica dental, desarrollada con React. Permite a los usuarios navegar entre distintos odontólogos, ver sus detalles, marcar favoritos y ajustar el tema visual (modo claro/oscuro).
 
-## Tecnologías Utilizadas
+## Herramientas Utilizadas
 
 - **React**: Para el desarrollo de la interfaz y manejo del estado.
 - **React Router**: Para la navegación entre páginas.
